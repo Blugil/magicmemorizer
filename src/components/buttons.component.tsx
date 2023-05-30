@@ -13,7 +13,11 @@ export const LoginButton = () => {
 
 export const LogoutButton = () => {
   return (
-    <button style={{ marginRight: 10 }} onClick={() => signOut()}>
+    <button style={{ marginRight: 10 }} onClick={() => {
+      console.log("signing out");
+      signOut();
+      }
+    }>
       Sign Out
     </button>
   );
