@@ -1,4 +1,3 @@
-import { User } from "@prisma/client";
 import type { Awaitable, NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google"
 
@@ -14,7 +13,7 @@ export const authOptions: NextAuthOptions = {
         return {
           id: profile.sub,
           email: profile.email,
-        } as Awaitable<User>;
+        };
       },
     }),
   ],
