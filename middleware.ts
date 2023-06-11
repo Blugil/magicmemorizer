@@ -4,7 +4,7 @@ import { withAuth } from "next-auth/middleware"
 export default withAuth({
   callbacks: {
     authorized({ req, token }) {
-      // `/admin` requires admin role
+      console.log(req, token);
       if (req.nextUrl.pathname === "/admin") {
         return token?.userRole === "admin"
       }
@@ -14,4 +14,4 @@ export default withAuth({
   },
 })
 
-export const config = { matcher: ["/admin", "/me"] }
+export const config = { matcher: ["/admin", "/me", "/profile"] }

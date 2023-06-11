@@ -19,7 +19,7 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     session: ({ session, token}) => {
-      //console.log("session callback", {session, token});
+      console.log("session callback", {session, token});
       return {
         ...session,
         user: {
@@ -34,9 +34,6 @@ export const authOptions: NextAuthOptions = {
         if (user.email === process.env.ADMIN_EMAIL) {
           token.userRole = "admin";
         }
-        else if (user.email === process.env.WIFE_EMAIL) {
-          token.userRole = "wife";
-        }
         else {
           token.userRole = "user";
         }
@@ -48,7 +45,19 @@ export const authOptions: NextAuthOptions = {
       }
       return token;
     },
+    async redirect({ url, baseUrl }) {
+      //console.log({url, baseUrl});
+      
+      // Allows relative callback URLs
+      //if (url.startsWith("/")) return `${baseUrl}${url}`
+      // Allows callback URLs on the same origin
+      //else if (new URL(url).origin === baseUrl) return url
+      return baseUrl 
+    }
   },
   secret: process.env.NEXTAUTH_SECRET,
+  pages: {
+    signIn: "/login"
+  },
 };
 
