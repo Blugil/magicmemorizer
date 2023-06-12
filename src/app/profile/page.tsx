@@ -5,7 +5,6 @@ import { redirect } from "next/navigation";
 export default async function Profile() {
   const session = await getServerSession(authOptions);
   if (!session) {
-    //redirect();
     redirect("/api/auth/signin");
   }
   if (session?.user?.email === process.env.ADMIN_EMAIL) {
