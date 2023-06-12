@@ -5,13 +5,6 @@ import { getServerSession } from 'next-auth';
 export default async function mepage() {
   const session = await getServerSession(authOptions);
   //console.log(session);
-  if (session?.user?.email === process.env.WIFE_EMAIL) {
-    return (
-      <div>
-        I love you babygirl! 
-      </div>
-    )
-  }
   if (session?.user?.email === process.env.ADMIN_EMAIL) {
     return (
       <div>
