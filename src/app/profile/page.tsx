@@ -9,13 +9,13 @@ export default async function Profile() {
   }
   if (session?.user?.email === process.env.ADMIN_EMAIL) {
     return (
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
+      <div className="flex z-10 w-full max-w-5xl items-center justify-around font-mono text-sm ">
         Welcome Administrator
       </div>
     )
   }
   return (
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
+      <div className="flex z-10 w-full max-w-5xl items-center justify-around font-mono text-sm ">
         This is the profile page! 
       </div>
   )

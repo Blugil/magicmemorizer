@@ -1,40 +1,20 @@
-"use client"
-
 import Link from 'next/link';
-import { useState } from 'react';
+import { NavRight } from './nav/nav.right';
 
-
-export default function Header() {
-  const [navbar, setNavbar] = useState(false);
+export async function Header(session: any) {
   return (
-    <nav className="w-full bg-black">
-      <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
+    <nav className="w-full bg-transparent mb-32">
+      <div className="flex justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
         <div>
           <div className="flex items-center justify-between py-3 md:py-5 md:block">
-            <a href="#">
-              <h2 className="text-2xl text-white font-bold">NEXT JS</h2>
-            </a>
+            <Link href="/">
+              <h2 className="text-2xl text-black font-bold">Magic Memorizer</h2>
+            </Link>
           </div>
         </div>
         <div>
-          <div
-            className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${
-              navbar ? 'block' : 'hidden'
-            }`}
-          >
-            <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-              <li className="text-white">
-                <Link href="/">
-                  Home
-                </Link>
-              </li>
-              <li className="text-white">
-                <Link href="/profile">
-                  Profile
-                </Link>
-              </li>
-            </ul>
-          </div>
+          {/* @ts-expect-error Server Component */}
+          <NavRight session={session} />
         </div>
       </div>
     </nav>
