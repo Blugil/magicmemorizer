@@ -8,6 +8,7 @@ import { authOptions } from '@/lib/auth'
 //import { redirect } from 'next/dist/server/api-utils'
 import { redirect } from 'next/navigation'
 import Provider from '@/components/provider';
+import Header from '@/components/header';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -28,7 +29,8 @@ export default async function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Provider>
-          <main className="flex min-h-screen flex-col items-center justify-between p-24">
+          <main className="flex min-h-screen flex-col items-center">
+            <Header />
             {children}
           </main>
         </Provider>
