@@ -11,7 +11,7 @@ export async function NavRight() {
     button = <SigninRegister />
   }
   return (
-    <div>
+    <div className="font-mono text-sm">
       {button}
     </div>
   );
