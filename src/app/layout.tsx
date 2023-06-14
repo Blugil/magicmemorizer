@@ -8,6 +8,7 @@ import { authOptions } from '@/lib/auth'
 //import { redirect } from 'next/dist/server/api-utils'
 import { redirect } from 'next/navigation'
 import Provider from '@/components/provider';
+import { Header } from '@/components/header';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,13 +23,13 @@ export default async function RootLayout({
     children: React.ReactNode
   }) {
 
-  const session = await getServerSession(authOptions);
-
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <body className={inter.className}>
         <Provider>
-          <main className="flex min-h-screen flex-col items-center justify-between p-24">
+          <main className="flex min-h-screen flex-col items-center">
+            {/* @ts-expect-error Server Component tracked issue here: https://github.com/vercel/next.js/issues/42292*/}
+            <Header />
             {children}
           </main>
         </Provider>
