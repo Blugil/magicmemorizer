@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { NavRight } from './nav/nav.right';
+import { NavRight } from './nav/nav_menu';
 
 export async function Header() {
   return (

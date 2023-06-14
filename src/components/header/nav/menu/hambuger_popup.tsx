@@ -10,11 +10,11 @@ export const HamburgerPopup = () => {
 
   if (session) {
     return (
-      <div className="absolute right-0 z-50 w-64 h-96 bg-zinc-800 rounded p-8">
+      <div className="absolute right-0 top-4 z-50 w-64 h-96 bg-zinc-800 rounded p-8">
         <ul className="flex-col space-around">
           <li className="mr-4">
             <Link href={"/profile"}>
-              <button style={{ marginRight: 10 }}>
+              <button>
                 Profile
               </button>
             </Link>
@@ -28,11 +28,10 @@ export const HamburgerPopup = () => {
     );
   }
   return (
-    <div className="absolute right-0 z-50 w-64 h-96 bg-zinc-800 rounded p-8">
+    <div className="absolute right-0 top-4 z-50 w-64 h-96 bg-zinc-800 rounded p-8">
       <ul className="flex-col space-around">
         <li className="mr-4">
-          <button style={{ marginRight: 10 }} onClick={() => {
-            console.log("signing in");
+          <button onClick={() => {
             signIn();
             }
           }>
@@ -40,8 +39,7 @@ export const HamburgerPopup = () => {
           </button>
         </li>
         <li>
-          <button style={{ marginRight: 10 }} onClick={() => {
-            console.log("signing out");
+          <button onClick={() => {
             signIn();
             }
           }>
@@ -53,4 +51,10 @@ export const HamburgerPopup = () => {
   );
 };
 
+export const test = () => {
+  return (
+ 
+    <></>
+  );
+}
 
