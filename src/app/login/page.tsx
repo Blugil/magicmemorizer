@@ -1,7 +1,7 @@
 import GoogleSignInButton, {
   LoginButton,
   LogoutButton,
-} from "@/components/buttons.component";
+} from "@/components/buttons";
 import { headers } from "next/headers";
 import Image from "next/image";
 

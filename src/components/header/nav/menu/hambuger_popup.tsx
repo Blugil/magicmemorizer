@@ -1,16 +1,17 @@
 "use client"
-import { LogoutButton } from "@/components/buttons.component";
+import { LoginButton } from "@/components/buttons";
+import { LogoutButton } from "@/components/buttons";
 import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 
 
 export const HamburgerPopup = () => {
   
-  const { data: session, status } = useSession()
+  const { data: session } = useSession();
 
   if (session) {
     return (
-      <div className="absolute right-0 top-4 z-50 w-64 h-96 bg-zinc-800 rounded p-8">
+      <div className="absolute right-0 top-4 z-50 w-64 h-96  rounded p-8 bg-gray-300 dark:bg-zinc-800">
         <ul className="flex-col space-around">
           <li className="mr-4">
             <Link href={"/profile"}>
@@ -19,7 +20,6 @@ export const HamburgerPopup = () => {
               </button>
             </Link>
           </li>
-
           <li>
             <LogoutButton />
           </li>
@@ -31,20 +31,10 @@ export const HamburgerPopup = () => {
     <div className="absolute right-0 top-4 z-50 w-64 h-96 bg-zinc-800 rounded p-8">
       <ul className="flex-col space-around">
         <li className="mr-4">
-          <button onClick={() => {
-            signIn();
-            }
-          }>
-           Login
-          </button>
+          <LoginButton />
         </li>
         <li>
-          <button onClick={() => {
-            signIn();
-            }
-          }>
-            Register
-          </button>
+          <LogoutButton />
         </li>
       </ul>
     </div>

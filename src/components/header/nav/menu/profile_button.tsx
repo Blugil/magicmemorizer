@@ -1,6 +1,6 @@
 "use client"
 
-import { LogoutButton } from "@/components/buttons.component";
+import { LogoutButton } from "@/components/buttons";
 import Link from "next/link";
 
 export const ProfileButton = () => {
