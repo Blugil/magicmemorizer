@@ -20,6 +20,13 @@ export const HamburgerPopup = () => {
               </button>
             </Link>
           </li>
+          <li className="mr-4">
+            <Link href={"/play"}>
+              <button>
+                Random
+              </button>
+            </Link>
+          </li>
           <li>
             <LogoutButton />
           </li>
