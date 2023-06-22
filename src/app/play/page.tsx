@@ -15,6 +15,7 @@ export default async function Play() {
   <div className="z-10 w-full max-w-5xl flex items-center justify-around font-mono text-sm lg:text-xl text-black dark:text-white">
     <div className="z-10 max-w-5xl flex-col text-center items-center justify-around font-mono text-sm lg:text-xl text-black dark:text-white">
       Name this random card! 
+      {/* @ts-expect-error Server Component tracked issue here: https://github.com/vercel/next.js/issues/42292*/}
       <Game />
     </div>
    </div> 

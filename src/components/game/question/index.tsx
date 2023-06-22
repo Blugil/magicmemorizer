@@ -3,31 +3,27 @@
 import { useState } from "react";
 import Card from "../card";
 import AnswerChoice from "./choices";
-
-interface gameState {
-  name: boolean,
-  body: boolean,
-  correct_answer: string,
-  answered_correctly: boolean | null
-}
+import { gameState } from "@/index";
+import { getQuestion } from "..";
+import delay from "@/util/delay";
 
 export default function Question({ answer, options }: any) {
 
-    const [gameState, setGameState] = useState<gameState>(
-      {
-        name: false,
-        body: true,
-        correct_answer: answer,
-        answered_correctly: null,
-      }
-    )
+  const [gameState, setGameState] = useState<gameState>(
+    {
+      name: false,
+      body: true,
+      correct_answer: answer,
+      options: options,
+    }
+  )
 
   const createOptions = (options: string[]): React.ReactElement[] => {
     let answerList: React.ReactElement[] = []
     options.forEach((option, index) => {
       answerList.push(
         <div key={index}>
-          <AnswerChoice option={option} answer={answer} handleAnswer={handleAnswer}/>
+          <AnswerChoice option={option} answer={gameState.correct_answer} handleAnswer={handleAnswer}/>
         </div>
       )
     });
@@ -35,23 +31,23 @@ export default function Question({ answer, options }: any) {
     return answerList
   }
 
-  const handleAnswer = (correctAnswer: string) => {
-    if (correctAnswer == answer) {
-      setGameState({
-        ...gameState, 
-        answered_correctly: true
-      })
-      console.log("you were right!");
-      return true;
-    }
+  //want clicking a button to mark the button as a certain color, then fetch for a new question, then repopulate question
+  //current bugs: want the feedback to be instant to the button color change but a delay on the new queston
+  //              button color persists even when a new question is fetched
+  const handleAnswer = async (option: string, correctAnswer: string) => {
+
+    const data = await getQuestion()
+    const new_options = data?.options
+    const new_answer = data?.answer
+
     setGameState({
       ...gameState, 
-      answered_correctly: false
+      correct_answer: new_answer,
+      options: new_options,
     })
-    console.log("you were wrong ):");
-    return false;
-  }
 
+    return correctAnswer == option
+  }
 
   return (
     <div className="z-10 w-full max-w-5xl flex items-center justify-around font-mono text-sm lg:text-xl text-black dark:text-white">
@@ -64,7 +60,7 @@ export default function Question({ answer, options }: any) {
           />
         </div>
         <div className="grid lg:grid-cols-2 gap-4">
-          {createOptions(options)}
+          {createOptions(gameState.options)}
         </div>
       </div>
     </div>
