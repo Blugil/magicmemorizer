@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { GameContext, GameContextType } from "./gameProvider";
 import Question from "./question";
 import ContinueButton from "./continueButton";
@@ -19,19 +19,23 @@ import ContinueButton from "./continueButton";
 // }
 
 export default function Game() {
-  //const endpoint = process.env.DEPLOYED_LINK || "http://localhost:3000/api"
 
-  // const data = await getQuestion();
-  // console.log(data);
+  const { loading, 
+          fetchQuestion
+          } = useContext(GameContext) as GameContextType;
 
-  // const shuffled_options = data?.options;
-  // const answer = data?.answer;
+  useEffect(() => {
+    fetchQuestion();
+  }, [])
 
-  // return <Question answer={answer} options={shuffled_options} />;
-  return (
+  return !loading ? (
     <>
       <Question />
       <ContinueButton />
     </>
-  );
+  ) : (
+    <div>
+      Loading
+    </div>
+  )
 }
