@@ -3,9 +3,14 @@ import { NextResponse } from 'next/server'
 
 export async function GET(request: Request) {
 
-  const endpoint = process.env.DEPLOYED_LINK || "http://localhost:3000/api";
-  const res = await fetch(`${endpoint}/internal/randomCard`, { cache: 'no-store' });
+  let card_name: string;
+  let card_image: string;
+
+  const res = await fetch("https://api.scryfall.com/cards/random", { cache: 'no-store' })
   const card = await res.json()
+
+  card_name = card.name;
+  card_image = card.image_uris.png;
 
   const options = [card.name, "Option 2", "Option 3", "Option 4"]
   const shuffled_options = shuffle(options);

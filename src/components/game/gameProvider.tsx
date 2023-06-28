@@ -48,7 +48,7 @@ export default function GameProvider({ children }: GameProviderProps) {
 
   async function fetchQuestion() {
     const endpoint = process.env.DEPLOYED_LINK || "http://localhost:3000/api";
-    fetch(`${endpoint}/question`, { cache: 'no-store' }).then((res) => {
+    fetch(`${endpoint}/randomQuestion`, { cache: 'no-store' }).then((res) => {
       res.json().then((data) => {
         setCurrentQuestion({
           ...currentQuestion,
