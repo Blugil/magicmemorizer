@@ -30,11 +30,10 @@ type GameProviderProps = {
 export default function GameProvider({ children }: GameProviderProps) {
   const [currentQuestion, setCurrentQuestion] = useState<Question>({
     name: false,
-    body: false,
-    answer: "one",
-    options: ["one", "two", "three", "four"],
-    artURL:
-      "https://cards.scryfall.io/large/front/2/1/21d92191-a743-4916-bbe4-5e207e964d9b.jpg?1562901760",
+    body: true,
+    answer: "",
+    options: [],
+    artURL: "",
   });
 
   const [answered, setAnswered] = useState<boolean>(false);
@@ -49,9 +48,8 @@ export default function GameProvider({ children }: GameProviderProps) {
 
   async function fetchQuestion() {
     const endpoint = process.env.DEPLOYED_LINK || "http://localhost:3000/api";
-    fetch(`${endpoint}/question`).then((res) => {
+    fetch(`${endpoint}/question`, { cache: 'no-store' }).then((res) => {
       res.json().then((data) => {
-        console.log(data.options, data.answer, data.artURL)
         setCurrentQuestion({
           ...currentQuestion,
           answer: data.answer,
@@ -67,7 +65,6 @@ export default function GameProvider({ children }: GameProviderProps) {
 
   async function nextQuestion() {
     setAnswered(false);
-    // Fetch the next question from some source here
     await fetchQuestion();
   }
 

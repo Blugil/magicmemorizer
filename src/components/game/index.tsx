@@ -5,18 +5,6 @@ import { GameContext, GameContextType } from "./gameProvider";
 import Question from "./question";
 import ContinueButton from "./continueButton";
 
-// import { shuffle } from "@/util/shuffle";
-// import Question from "./question";
-// import { useState } from "react";
-
-// export async function getQuestion() {
-//   const endpoint = process.env.DEPLOYED_LINK || "http://localhost:3000/api";
-//   const data = await fetch(`${endpoint}/question`);
-//   if (!data.ok) {
-//     throw new Error("Failed to fetch data");
-//   }
-//   return data.json();
-// }
 
 export default function Game() {
 
@@ -30,6 +18,7 @@ export default function Game() {
 
   return !loading ? (
     <>
+      Name this random card!
       <Question />
       <ContinueButton />
     </>

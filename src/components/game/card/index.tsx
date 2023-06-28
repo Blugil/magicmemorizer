@@ -9,7 +9,7 @@ export default function Card() {
   return (
     <div className="rounded-xl w-64 h-96 flex items-center relative overflow-hidden">
       <div
-        className={`absolute w-full h-8 blur-sm top-3.5 backdrop-blur rounded-xl ${
+        className={`absolute w-full h-12 blur-sm top-3.5 backdrop-blur rounded-xl ${
           currentQuestion.name ? "hidden" : "block"
         }`}
       ></div>
