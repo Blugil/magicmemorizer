@@ -50,6 +50,7 @@ export default function GameProvider({ children }: GameProviderProps) {
     const endpoint = process.env.DEPLOYED_LINK || "http://localhost:3000/api";
     fetch(`${endpoint}/randomQuestion`, { cache: 'no-store' }).then((res) => {
       res.json().then((data) => {
+        console.log(data.artURL);
         setCurrentQuestion({
           ...currentQuestion,
           answer: data.answer,
