@@ -1,6 +1,5 @@
 "use client";
-
-import { Question } from "@/index";
+import { Question } from "@/index"
 import {
   Dispatch,
   ReactNode,
@@ -18,6 +17,8 @@ export interface GameContextType {
   fetchQuestion: Function;
   answered: boolean;
   loading: boolean;
+  handleContinueClick: Function;
+  fade: boolean;
 }
 
 export const GameContext = createContext<GameContextType | null>(null);
@@ -38,7 +39,13 @@ export default function GameProvider({ children }: GameProviderProps) {
 
   const [answered, setAnswered] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
+  const [fade, setFade] = useState<boolean>(false);
+  //const [question, setQuestion] = useState<string>("hidden");
 
+  const handleContinueClick = () => {
+    //setQuestion("inline-block");
+    setFade(false);
+  };
 
   // Helper functions
   function answerQuestion(selection: string): boolean {
@@ -58,6 +65,7 @@ export default function GameProvider({ children }: GameProviderProps) {
           artURL: data.artURL,
         });
         setLoading(false);
+        setFade(true);
       });
     }).catch((err) => {
       console.error(err);
@@ -66,6 +74,7 @@ export default function GameProvider({ children }: GameProviderProps) {
 
   async function nextQuestion() {
     setAnswered(false);
+    setFade(false);
     await fetchQuestion();
   }
 
@@ -79,6 +88,8 @@ export default function GameProvider({ children }: GameProviderProps) {
         fetchQuestion,
         answered,
         loading,
+        handleContinueClick,
+        fade
       }}
     >
       {children}

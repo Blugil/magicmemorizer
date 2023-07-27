@@ -1,4 +1,4 @@
-import { shuffle } from "@/util/shuffle";
+import { shuffle } from '@/util/shuffle'
 import { NextResponse } from 'next/server'
 
 export async function GET(request: Request) {
