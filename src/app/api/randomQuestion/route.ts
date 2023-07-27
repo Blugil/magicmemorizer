@@ -3,26 +3,20 @@ import { NextResponse } from 'next/server'
 
 export async function GET(request: Request) {
 
-  let query_string: string = "?q="
-
-  let card_name: string;
-  let card_image: string;
-
+  // gets a random card from scryfall
   const res_random = await fetch("https://api.scryfall.com/cards/random", { cache: 'no-store' })
   if (res_random.status == 429) {
     return NextResponse.error()
   }
 
   const card = await res_random.json()
-
-  //console.log(card);
-
   let card_typeline: string = card.type_line;
 
-
+  // starts creating the query string for matching cards
+  let query_string: string = "q="
   query_string = query_string + `type:${card_typeline.split(" ")[0].toLowerCase()}`
 
-  if (card.color_identity) {
+  if (card.color_identity && card.color_identity.length > 0) {
     let color_string: string = "color:";
     card.color_identity.forEach((color: string) => {
       color_string = color_string + color;
@@ -33,33 +27,22 @@ export async function GET(request: Request) {
     query_string = query_string + `+cmc:${card.cmc}`;
   }
 
-  console.log(query_string);
-
-  //const res_similar = await fetch(`https://api.scryfall.com/cards/search?q=${"tst"}`);
-  //grab the color(s), and the type line
-  //parse it into a query string
-  //attach it to the api call
-  //pick three random cards
-  //create those options
-  //
-  const res_options = await fetch(`https://api.scryfall.com/cards/search${encodeURI(query_string)}`, { cache: 'no-store' })
+  const res_options = await fetch(`https://api.scryfall.com/cards/search?format=json&include_extras=false&include_multilingual=false&include_variations=false&order=review&page=1&${encodeURI(query_string)}`, { cache: 'no-store' })
 
   const test_options = await res_options.json()
-  console.log(test_options.total_cards);
-
   const card_options = test_options.data;
 
 
+  let random_card_options = [];
+  while(random_card_options.length < 3){
+      let r = Math.floor(Math.random() * card_options.length) + 1;
+      if(random_card_options.indexOf(r) === -1) random_card_options.push(r);
+  }
 
-  card_name = card.name;
-  card_image = card.image_uris.png;
-
-  //console.log(card_image);
-
-  const options = [card.name, card_options[0].name, card_options[1].name, card_options[2].name];
+  const options = [card.name, card_options[random_card_options[0]].name, card_options[random_card_options[1]].name, card_options[random_card_options[2]].name];
   const shuffled_options = shuffle(options);
   const answer = shuffled_options.indexOf(card.name);
-  const artURL = card_image;
+  const artURL = card.image_uris.png;
 
   return NextResponse.json({
     options: shuffled_options,
