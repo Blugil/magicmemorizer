@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "generate": "npx prisma generate --schema=./src/prisma/schema.prisma && next dev"
+    "generate": "npx prisma generate --schema=./src/prisma/schema.prisma && next dev",
+    "lint": "eslint ./src/ --ext .ts",
+    "format": "npx prettier -- \"**/*.{js,ts,json, md}\""
   },
   "dependencies": {
     "@prisma/client": "4.14.1",

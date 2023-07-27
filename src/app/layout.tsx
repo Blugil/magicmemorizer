@@ -1,12 +1,5 @@
-import { getServerSession } from 'next-auth'
 import './globals.css'
 import { Inter } from 'next/font/google'
-import {
-  Nav,
-} from "@/components/nav.component";
-import { authOptions } from '@/lib/auth'
-//import { redirect } from 'next/dist/server/api-utils'
-import { redirect } from 'next/navigation'
 import Provider from '@/components/provider';
 import { Header } from '@/components/header';
 
