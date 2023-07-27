@@ -1,9 +1,7 @@
 "use client"
-import { LoginButton } from "@/components/buttons";
-import { LogoutButton } from "@/components/buttons";
+import { LoginButton, LogoutButton } from "@/components/buttons";
 import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
-
 
 export const HamburgerPopup = () => {
   
